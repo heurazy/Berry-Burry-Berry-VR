@@ -85,6 +85,7 @@ namespace BerryVR
         private bool _placed;
         private float _placeAt;
         private float _lookAwaySince = -1f;
+        private bool _recentering;
         private bool _layoutReady;
         private bool _hudLayout;
         private float _layoutWidth = MenuWidth;
@@ -148,6 +149,7 @@ namespace BerryVR
             _placed = false;
             _placeAt = 0f;
             _lookAwaySince = -1f;
+            _recentering = false;
         }
 
         public void OnSceneUnloaded()
@@ -566,6 +568,33 @@ namespace BerryVR
                 return;
             }
 
+            // The body can move while a menu is open: falling into the hole,
+            // being teleported to the night/shop area, a cutscene moving the
+            // player. Follow the head whenever the panel ends up clearly out
+            // of place, and jump straight there after a teleport.
+            ComputePanelTarget(head, out Vector3 target, out Quaternion targetRot);
+            float drift = Vector3.Distance(_panelPos, target);
+            Vector3 flat = _panelPos - head.position;
+            float vertical = Mathf.Abs(flat.y + MenuDrop);
+            flat.y = 0f;
+            float reach = Mathf.Abs(flat.magnitude - MenuDistance);
+            if (drift > 4f)
+            {
+                PlacePanel(true);
+                _recentering = false;
+                return;
+            }
+            if (vertical > 0.45f || reach > 0.6f)
+                _recentering = true;
+
+            if (_recentering)
+            {
+                PlacePanel(false);
+                if (Vector3.Distance(_panelPos, target) < 0.03f && Quaternion.Angle(_panelRot, targetRot) < 2f)
+                    _recentering = false;
+                return;
+            }
+
             // Keep the panel reachable when a seated player turns a long way,
             // but do not glue it to the head: looking around stays natural.
             Vector3 toPanel = _panelPos - head.position;
@@ -581,7 +610,8 @@ namespace BerryVR
                     if (_lookAwaySince < 0f) _lookAwaySince = now;
                     else if (now - _lookAwaySince > 1.1f)
                     {
-                        PlacePanel(false);
+                        // Glide all the way back in front over the next frames.
+                        _recentering = true;
                         _lookAwaySince = -1f;
                     }
                 }

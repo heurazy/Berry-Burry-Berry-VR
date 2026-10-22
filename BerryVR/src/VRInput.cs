@@ -247,6 +247,17 @@ namespace BerryVR
                 return;
             try
             {
+                // In VR the desktop window rarely has focus (the headset app,
+                // SteamVR or Virtual Desktop usually does). By default the
+                // Input System resets and disables devices when the window
+                // loses focus, which froze every action until the player
+                // clicked the game window.
+                if (InputSystem.settings.backgroundBehavior != InputSettings.BackgroundBehavior.IgnoreFocus)
+                {
+                    InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+                    BerryVRPlugin.Log.LogInfo("[VR] Input keeps running when the game window is not focused.");
+                }
+
                 InputSystem.RegisterLayout<BerryVRController>();
                 Device = InputSystem.AddDevice<BerryVRController>("BerryVRController");
                 BerryVRPlugin.Log.LogInfo("[VR] Virtual input device created: " + (Device != null));
