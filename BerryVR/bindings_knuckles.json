@@ -1,0 +1,146 @@
+{
+  "action_manifest_version": 0,
+  "bindings": {
+    "/actions/gameplay": {
+      "sources": [
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/stick_left"
+            },
+            "position": {
+              "output": "/actions/gameplay/in/move"
+            }
+          },
+          "mode": "joystick",
+          "path": "/user/hand/left/input/thumbstick"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/stick_right"
+            },
+            "position": {
+              "output": "/actions/gameplay/in/turn"
+            }
+          },
+          "mode": "joystick",
+          "path": "/user/hand/right/input/thumbstick"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/airblast"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/left/input/trigger"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/throw"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/right/input/trigger"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/sprint"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/left/input/grip"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/pickup"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/right/input/grip"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/jump"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/right/input/a"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/drop"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/right/input/b"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/shop"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/left/input/a"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/movehole"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/left/input/b"
+        }
+      ],
+      "poses": [
+        {
+          "output": "/actions/gameplay/in/grip_left",
+          "path": "/user/hand/left/pose/handgrip"
+        },
+        {
+          "output": "/actions/gameplay/in/aim_left",
+          "path": "/user/hand/left/pose/raw"
+        },
+        {
+          "output": "/actions/gameplay/in/grip_right",
+          "path": "/user/hand/right/pose/handgrip"
+        },
+        {
+          "output": "/actions/gameplay/in/aim_right",
+          "path": "/user/hand/right/pose/raw"
+        }
+      ],
+      "skeleton": [
+        {
+          "output": "/actions/gameplay/in/skeleton_left",
+          "path": "/user/hand/left/input/skeleton/left"
+        },
+        {
+          "output": "/actions/gameplay/in/skeleton_right",
+          "path": "/user/hand/right/input/skeleton/right"
+        }
+      ],
+      "haptics": [
+        {
+          "output": "/actions/gameplay/out/haptic_left",
+          "path": "/user/hand/left/output/haptic"
+        },
+        {
+          "output": "/actions/gameplay/out/haptic_right",
+          "path": "/user/hand/right/output/haptic"
+        }
+      ]
+    }
+  },
+  "controller_type": "knuckles",
+  "description": "Berry VR - Valve Index",
+  "name": "berryvr_knuckles"
+}

@@ -1,0 +1,128 @@
+{
+  "action_manifest_version": 0,
+  "bindings": {
+    "/actions/gameplay": {
+      "sources": [
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/stick_left"
+            },
+            "position": {
+              "output": "/actions/gameplay/in/move"
+            }
+          },
+          "mode": "trackpad",
+          "path": "/user/hand/left/input/trackpad"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/jump"
+            },
+            "position": {
+              "output": "/actions/gameplay/in/turn"
+            }
+          },
+          "mode": "trackpad",
+          "path": "/user/hand/right/input/trackpad"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/airblast"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/left/input/trigger"
+        },
+        {
+          "inputs": {
+            "pull": {
+              "output": "/actions/gameplay/in/throw"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/hand/right/input/trigger"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/sprint"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/left/input/grip"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/pickup"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/right/input/grip"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/drop"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/right/input/application_menu"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/gameplay/in/menu"
+            }
+          },
+          "mode": "button",
+          "path": "/user/hand/left/input/application_menu"
+        }
+      ],
+      "poses": [
+        {
+          "output": "/actions/gameplay/in/grip_left",
+          "path": "/user/hand/left/pose/handgrip"
+        },
+        {
+          "output": "/actions/gameplay/in/aim_left",
+          "path": "/user/hand/left/pose/raw"
+        },
+        {
+          "output": "/actions/gameplay/in/grip_right",
+          "path": "/user/hand/right/pose/handgrip"
+        },
+        {
+          "output": "/actions/gameplay/in/aim_right",
+          "path": "/user/hand/right/pose/raw"
+        }
+      ],
+      "skeleton": [
+        {
+          "output": "/actions/gameplay/in/skeleton_left",
+          "path": "/user/hand/left/input/skeleton/left"
+        },
+        {
+          "output": "/actions/gameplay/in/skeleton_right",
+          "path": "/user/hand/right/input/skeleton/right"
+        }
+      ],
+      "haptics": [
+        {
+          "output": "/actions/gameplay/out/haptic_left",
+          "path": "/user/hand/left/output/haptic"
+        },
+        {
+          "output": "/actions/gameplay/out/haptic_right",
+          "path": "/user/hand/right/output/haptic"
+        }
+      ]
+    }
+  },
+  "controller_type": "vive_controller",
+  "description": "Berry VR - HTC Vive wand (best effort)",
+  "name": "berryvr_vive"
+}

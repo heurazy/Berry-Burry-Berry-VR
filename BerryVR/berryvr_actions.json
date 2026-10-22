@@ -1,0 +1,133 @@
+{
+  "action_manifest_version": 0,
+  "actions": [
+    {
+      "name": "/actions/gameplay/in/move",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/gameplay/in/turn",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/gameplay/in/jump",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/sprint",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/gameplay/in/pickup",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/gameplay/in/throw",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/gameplay/in/airblast",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/gameplay/in/drop",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/shop",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/movehole",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/menu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/stick_left",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/stick_right",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/gameplay/in/grip_left",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/gameplay/in/aim_left",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/gameplay/in/grip_right",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/gameplay/in/aim_right",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/gameplay/in/skeleton_left",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/gameplay/in/skeleton_right",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/gameplay/out/haptic_left",
+      "type": "vibration"
+    },
+    {
+      "name": "/actions/gameplay/out/haptic_right",
+      "type": "vibration"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/gameplay",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/gameplay/in/move": "Move",
+      "/actions/gameplay/in/turn": "Snap Turn",
+      "/actions/gameplay/in/jump": "Jump",
+      "/actions/gameplay/in/sprint": "Sprint (left grip)",
+      "/actions/gameplay/in/pickup": "Grab / Vacuum (right grip)",
+      "/actions/gameplay/in/throw": "Throw / Use (right trigger)",
+      "/actions/gameplay/in/airblast": "Air Blast (left trigger)",
+      "/actions/gameplay/in/drop": "Drop / Destroy",
+      "/actions/gameplay/in/shop": "Shop",
+      "/actions/gameplay/in/movehole": "Move Hole",
+      "/actions/gameplay/in/menu": "Pause / Recenter",
+      "/actions/gameplay/in/stick_left": "Berry Blitz (left stick click)",
+      "/actions/gameplay/in/stick_right": "Rotate / Gaping Maw",
+      "/actions/gameplay/in/skeleton_left": "Hand Skeleton (Left)",
+      "/actions/gameplay/in/skeleton_right": "Hand Skeleton (Right)",
+      "/actions/gameplay/out/haptic_left": "Vibration (Left)",
+      "/actions/gameplay/out/haptic_right": "Vibration (Right)"
+    }
+  ]
+}
