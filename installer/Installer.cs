@@ -24,10 +24,10 @@ internal static class Installer
     private static int Main(string[] args)
     {
         try { Console.OutputEncoding = Encoding.UTF8; } catch { }
-        Console.Title = "Berry Bury Berry VR - Installateur";
+        Console.Title = "Berry Bury Berry VR - Installer";
 
         Say("==============================================", ConsoleColor.Magenta);
-        Say("   Berry Bury Berry VR - Installateur", ConsoleColor.Magenta);
+        Say("   Berry Bury Berry VR - Installer", ConsoleColor.Magenta);
         Say("==============================================", ConsoleColor.Magenta);
         Console.WriteLine();
 
@@ -47,17 +47,17 @@ internal static class Installer
             if (game == null) game = AskForGame();
             if (game == null)
             {
-                Say("Installation annulée.", ConsoleColor.Yellow);
+                Say("Installation cancelled.", ConsoleColor.Yellow);
                 return Pause(1);
             }
-            Say("Jeu trouvé : " + game, ConsoleColor.Green);
+            Say("Game found: " + game, ConsoleColor.Green);
             Console.WriteLine();
 
             if (!uninstall)
             {
-                Console.WriteLine("  [1] Installer / mettre à jour le mod VR");
-                Console.WriteLine("  [2] Désinstaller le mod VR");
-                Console.Write("Choix (1 par défaut) : ");
+                Console.WriteLine("  [1] Install / update the VR mod");
+                Console.WriteLine("  [2] Uninstall the VR mod");
+                Console.Write("Choice (default 1): ");
                 string c = (Console.ReadLine() ?? "").Trim();
                 uninstall = c == "2";
                 Console.WriteLine();
@@ -72,7 +72,7 @@ internal static class Installer
         catch (Exception e)
         {
             Console.WriteLine();
-            Say("Erreur : " + e.Message, ConsoleColor.Red);
+            Say("Error: " + e.Message, ConsoleColor.Red);
             return Pause(1);
         }
     }
@@ -83,12 +83,12 @@ internal static class Installer
 
     private static void Install(string game)
     {
-        Say("Installation en cours...", ConsoleColor.Cyan);
+        Say("Installing...", ConsoleColor.Cyan);
         int written = 0, kept = 0;
 
         using (var res = Assembly.GetExecutingAssembly().GetManifestResourceStream("payload.zip"))
         {
-            if (res == null) throw new InvalidOperationException("payload.zip manquant dans l'installateur.");
+            if (res == null) throw new InvalidOperationException("payload.zip is missing from the installer.");
             using (var zip = new ZipArchive(res, ZipArchiveMode.Read))
             {
                 foreach (var entry in zip.Entries)
@@ -113,27 +113,31 @@ internal static class Installer
             }
         }
 
-        Console.WriteLine("  " + written + " fichiers installés" + (kept > 0 ? ", " + kept + " réglages conservés." : "."));
+        // The guide used to ship in French under another name.
+        string oldGuide = Path.Combine(game, PluginDir, "README_CONTROLES.txt");
+        if (File.Exists(oldGuide)) File.Delete(oldGuide);
+
+        Console.WriteLine("  " + written + " files installed" + (kept > 0 ? ", " + kept + " settings kept." : "."));
         Console.WriteLine();
-        Say("Installation terminée !", ConsoleColor.Green);
+        Say("Installation complete!", ConsoleColor.Green);
         Console.WriteLine();
-        Console.WriteLine("Pour jouer :");
-        Console.WriteLine("  1. Lance SteamVR et mets ton casque (Virtual Desktop, Link, ...).");
-        Console.WriteLine("  2. Lance Berry Bury Berry depuis Steam.");
-        Console.WriteLine("  Sans SteamVR, le jeu démarre normalement sur l'écran.");
+        Console.WriteLine("To play:");
+        Console.WriteLine("  1. Start SteamVR and put on your headset (Virtual Desktop, Link, ...).");
+        Console.WriteLine("  2. Launch Berry Bury Berry from Steam.");
+        Console.WriteLine("  Without SteamVR, the game starts normally on your monitor.");
         Console.WriteLine();
-        Console.WriteLine("Contrôles et réglages : " + Path.Combine(game, PluginDir, "README_CONTROLES.txt"));
+        Console.WriteLine("Controls and settings: " + Path.Combine(game, PluginDir, "README_CONTROLS.txt"));
     }
 
     private static void Uninstall(string game)
     {
-        Say("Désinstallation en cours...", ConsoleColor.Cyan);
+        Say("Uninstalling...", ConsoleColor.Cyan);
         DeleteDir(Path.Combine(game, PluginDir));
         DeleteFile(Path.Combine(game, "openvr_api.dll"));
 
-        Console.Write("Supprimer aussi BepInEx (le chargeur de mods) ? Garde-le si tu as d'autres mods. (o/N) : ");
+        Console.Write("Also remove BepInEx (the mod loader)? Keep it if you use other mods. (y/N): ");
         string c = (Console.ReadLine() ?? "").Trim().ToLowerInvariant();
-        if (c == "o" || c == "y" || c == "oui" || c == "yes")
+        if (c == "y" || c == "yes")
         {
             DeleteFile(Path.Combine(game, "winhttp.dll"));
             DeleteFile(Path.Combine(game, "doorstop_config.ini"));
@@ -142,7 +146,7 @@ internal static class Installer
             DeleteDir(Path.Combine(game, "BepInEx"));
         }
         Console.WriteLine();
-        Say("Mod VR désinstallé.", ConsoleColor.Green);
+        Say("VR mod uninstalled.", ConsoleColor.Green);
     }
 
     private static void DeleteFile(string path)
@@ -160,7 +164,7 @@ internal static class Installer
         string name = Path.GetFileNameWithoutExtension(GameExe);
         while (Process.GetProcessesByName(name).Length > 0)
         {
-            Say("Le jeu est ouvert : ferme-le puis appuie sur Entrée.", ConsoleColor.Yellow);
+            Say("The game is running: close it, then press Enter.", ConsoleColor.Yellow);
             Console.ReadLine();
         }
     }
@@ -224,15 +228,15 @@ internal static class Installer
 
     private static string AskForGame()
     {
-        Say("Je n'ai pas trouvé le jeu automatiquement.", ConsoleColor.Yellow);
+        Say("Could not find the game automatically.", ConsoleColor.Yellow);
         while (true)
         {
-            Console.WriteLine("Colle le chemin du dossier du jeu (celui qui contient " + GameExe + ")");
-            Console.Write("ou laisse vide pour annuler : ");
+            Console.WriteLine("Paste the game folder path (the one containing " + GameExe + ")");
+            Console.Write("or leave empty to cancel: ");
             string p = (Console.ReadLine() ?? "").Trim().Trim('"');
             if (p.Length == 0) return null;
             if (IsGameDir(p)) return p;
-            Say("Ce dossier ne contient pas le jeu.", ConsoleColor.Red);
+            Say("That folder does not contain the game.", ConsoleColor.Red);
         }
     }
 
@@ -249,7 +253,7 @@ internal static class Installer
     private static int Pause(int code)
     {
         Console.WriteLine();
-        Console.Write("Appuie sur Entrée pour fermer.");
+        Console.Write("Press Enter to close.");
         Console.ReadLine();
         return code;
     }

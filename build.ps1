@@ -68,7 +68,7 @@ New-Item -ItemType Directory -Force $plugin | Out-Null
 Copy-Item (Join-Path $out "plugin\BerryVR.dll") $plugin
 Copy-Item (Join-Path $nativeOut "BerryVRRender.dll") $plugin
 Copy-Item (Join-Path $root "BerryVR\*.json") $plugin
-Copy-Item (Join-Path $root "BerryVR\README_CONTROLES.txt") $plugin
+Copy-Item (Join-Path $root "BerryVR\README_CONTROLS.txt") $plugin
 $licenses = Join-Path $plugin "licenses"
 New-Item -ItemType Directory -Force $licenses | Out-Null
 Copy-Item (Join-Path $root "LICENSE") (Join-Path $licenses "BerryVR-LICENSE.txt")

@@ -442,7 +442,7 @@ namespace BerryVR
             bool stickRPressed = _btnStickR && !_prevStickR;
             bool stickLPressed = _btnStickL && !_prevStickL;
 
-            // Left stick click: Berry Blitz ("Fruits en folie"). Crouching is
+            // Left stick click: Berry Blitz ("Fruits en folie" in French). Crouching is
             // done by physically crouching in VR.
             if (stickLPressed)
                 _pulseBlitz = true;
